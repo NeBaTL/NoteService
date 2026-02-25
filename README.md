@@ -7,7 +7,7 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
 
-# Проект 2: Сервис заметок (Notes Service)
+Сервис заметок (Note Service)
 
 Командный проект по разработке веб-приложения для создания и управления заметками.
 
@@ -30,8 +30,6 @@
 
 *   **Бэкенд:** PHP 8.3+, Laravel 11
 *   **База данных:** MySQL / MariaDB
-*   **Фронтенд:** Blade-шаблоны Laravel
-*   **Тестирование:** PHPUnit / Laravel Dusk
 *   **Система контроля версий:** Git, GitHub
 
 ## Правила работы с репозиторием
