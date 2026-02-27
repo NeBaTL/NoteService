@@ -1,66 +1,87 @@
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+# Сервис заметок (Notes Service)
 
-## About Laravel
+Командный проект по разработке веб-приложения для создания и управления заметками.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## Описание проекта
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+**Сервис заметок** — это веб-приложение, разрабатываемое в рамках учебного курса. Цель проекта — создание полнофункционального приложения с использованием современного стека технологий и практик командной разработки, таких как Git Flow и код-ревью.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+Приложение позволит пользователям:
+*   Регистрироваться и авторизовываться.
+*   Создавать, редактировать и удалять заметки.
+*   Организовывать заметки по категориям или тегам.
 
-## Learning Laravel
+## Участники команды
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+*   **Разработчик:** [Лозовой Николай](https://github.com/NeBaTL)
+*   **Разработчик:** [Кузнецов Семён](https://github.com/Simens-code)
+*   **Заказчик/Тимлид:** [Сальков Михаил](https://github.com/Laggon)
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+## Стек технологий
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+*   **Бэкенд:** PHP 8.3+, Laravel 12
+*   **База данных:** MySQL
+*   **Фронтенд:** Blade-шаблоны Laravel, Node.js, Vite
+*   **Админ-панель:** Orchid Platform
+*   **Тестирование:** PHPUnit / Laravel Dusk
+*   **Система контроля версий:** Git, GitHub
 
-## Laravel Sponsors
+## Правила работы с репозиторием
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+1.  **Ветки:** Запрещена прямая загрузка кода в ветку `main`. Все изменения должны разрабатываться в отдельных тематических ветках.
+2.  **Pull Requests (PR):** Каждое изменение вносится через Pull Request с обязательным ревью от тимлида.
 
-### Premium Partners
+## Установка и запуск проекта
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+### Требования
+- PHP >= 8.3
+- Composer
+- MySQL
+- Node.js (v18+) и NPM
 
-## Contributing
+### Пошаговая установка
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+1. **Клонируйте репозиторий**
+    ```bash
+    git clone https://github.com/NeBaTL/NoteService.git
+    cd NoteService
+2. **Установите зависимости PHP**
+    ```bash
+    composer install
+3. **Установите зависимости Node.js**
+    ```bash
+    npm install
+4. **Настройте окружение**
+    ```bash
+    cp .env.example .env
+    php artisan key:generate
+    Настройте подключение к MySQL
 
-## Code of Conduct
+5. **Откройте файл .env и укажите параметры вашей базы данных:**
+    ```env
+    DB_CONNECTION=mysql
+    DB_HOST=127.0.0.1
+    DB_PORT=3306
+    DB_DATABASE=notes_db
+    DB_USERNAME=root
+    DB_PASSWORD=
+6. **Выполните миграции**
+    ```bash
+    php artisan migrate
+7. **Установите Orchid (админ-панель)**
+    ```bash
+    php artisan orchid:install
+    php artisan orchid:admin
+8. **Соберите фронтенд**
+    ```bash
+    npm run build
+9. **Запустите сервер**
+    ```bash
+    php artisan serve
+10. **Откройте в браузере**
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+    Основной сайт: http://127.0.0.1:8000
 
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+    Админ-панель Orchid: http://127.0.0.1:8000/admin
