@@ -10,7 +10,7 @@ return new class extends Migration
         Schema::create('note_category', function (Blueprint $table) {
             $table->id();
             $table->foreignId('note_id')->constrained()->onDelete('cascade');
-            $table->foreignId('note_category_id')->constrained()->onDelete('cascade');
+            $table->foreignId('note_categories_id')->constrained()->onDelete('cascade');
             $table->timestamps();
             $table->unique(['note_id', 'note_category_id']);
         });
