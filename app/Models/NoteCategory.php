@@ -12,7 +12,7 @@ class NoteCategory extends Model
 {
     use AsSource, Filterable;
 
-    protected $table = 'notes_category';
+    
     
     protected $fillable = ['user_id', 'name'];
 
