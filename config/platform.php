@@ -99,7 +99,7 @@ return [
      |
      */
 
-    'index' => 'platform.main',
+    'index' => 'platform.note.list',
 
     /*
      |--------------------------------------------------------------------------
@@ -111,7 +111,7 @@ return [
      |
      */
 
-    'profile' => 'platform.profile',
+    'profile' => 'platform.note.list',
 
     /*
      |--------------------------------------------------------------------------
@@ -304,6 +304,28 @@ return [
     | or disabled for the application.
     |
     */
+    /*
+    |--------------------------------------------------------------------------
+    | Menu
+    |--------------------------------------------------------------------------
+    */
+        'menu' => [
+        'main' => [
+            [
+                'title' => 'Заметки',
+                'icon'  => 'bs.file-text',
+                'route' => 'platform.note.list',
+                'sort'  => 1,
+            ],
+            [
+                'title' => 'Категории',
+                'icon'  => 'bs.tags',
+                'route' => 'platform.category.list',
+                'sort'  => 2,
+            ],
+            // Убедитесь, что здесь нет platform.main или platform.example
+        ],
+    ],
 
     'prevents_abandonment' => true,
 
@@ -320,5 +342,6 @@ return [
      */
 
     'provider' => \App\Orchid\PlatformProvider::class,
+
 
 ];
