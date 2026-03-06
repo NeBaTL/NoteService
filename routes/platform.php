@@ -1,10 +1,7 @@
 <?php
 
 declare(strict_types=1);
-//use Orchid\Platform\Screen\UserListScreen;
-//use Orchid\Platform\Screen\UserEditScreen;
-//use Orchid\Platform\Screen\RoleListScreen;
-//use Orchid\Platform\Screen\RoleEditScreen;
+
 use App\Orchid\Screens\Note\NoteEditScreen;
 use App\Orchid\Screens\Note\NoteListScreen;
 use App\Orchid\Screens\Category\CategoryEditScreen;
@@ -18,18 +15,7 @@ use App\Orchid\Screens\User\UserListScreen;
 use App\Orchid\Screens\User\UserProfileScreen;
 use App\Orchid\Screens\PlatformScreen;
 
-// !!! ВРЕМЕННО ЗАКОММЕНТИРУЙТЕ ЭТИ СТРОКИ !!!
-// Route::screen('main', \Orchid\Screen\Components\EmptyScreen::class)
-//     ->name('platform.main');
 
-// Route::screen('example', \Orchid\Press\Screen\ExampleScreen::class)
-//     ->name('platform.example');
-
-// Route::screen('examples/forms', \Orchid\Press\Screen\ExampleScreen::class)
-//     ->name('platform.example.forms');
-
-// Route::screen('examples/layouts', \Orchid\Press\Screen\ExampleScreen::class)
-//     ->name('platform.example.layouts');
 
 // Ваши маршруты (эти оставьте)
 Route::screen('notes', NoteListScreen::class)
