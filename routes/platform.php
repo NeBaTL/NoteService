@@ -2,40 +2,57 @@
 
 declare(strict_types=1);
 
-use App\Orchid\Screens\Examples\ExampleActionsScreen;
-use App\Orchid\Screens\Examples\ExampleCardsScreen;
-use App\Orchid\Screens\Examples\ExampleChartsScreen;
-use App\Orchid\Screens\Examples\ExampleFieldsAdvancedScreen;
-use App\Orchid\Screens\Examples\ExampleFieldsScreen;
-use App\Orchid\Screens\Examples\ExampleGridScreen;
-use App\Orchid\Screens\Examples\ExampleLayoutsScreen;
-use App\Orchid\Screens\Examples\ExampleScreen;
-use App\Orchid\Screens\Examples\ExampleTextEditorsScreen;
-use App\Orchid\Screens\PlatformScreen;
+use App\Orchid\Screens\Note\NoteEditScreen;
+use App\Orchid\Screens\Note\NoteListScreen;
+use App\Orchid\Screens\Category\CategoryEditScreen;
+use App\Orchid\Screens\Category\CategoryListScreen;
+use Illuminate\Support\Facades\Route;
+use Tabuna\Breadcrumbs\Trail;
 use App\Orchid\Screens\Role\RoleEditScreen;
 use App\Orchid\Screens\Role\RoleListScreen;
 use App\Orchid\Screens\User\UserEditScreen;
 use App\Orchid\Screens\User\UserListScreen;
 use App\Orchid\Screens\User\UserProfileScreen;
-use Illuminate\Support\Facades\Route;
-use Tabuna\Breadcrumbs\Trail;
+use App\Orchid\Screens\PlatformScreen;
 
-/*
-|--------------------------------------------------------------------------
-| Dashboard Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the need "dashboard" middleware group. Now create something great!
-|
-*/
 
-// Main
-Route::screen('/main', PlatformScreen::class)
-    ->name('platform.main');
 
-// Platform > Profile
+// Ваши маршруты (эти оставьте)
+Route::screen('notes', NoteListScreen::class)
+    ->name('platform.note.list')
+    ->breadcrumbs(fn (Trail $trail) => $trail
+        ->parent('platform.index')
+        ->push('Заметки', route('platform.note.list')));
+
+Route::screen('notes/create', NoteEditScreen::class)
+    ->name('platform.note.create')
+    ->breadcrumbs(fn (Trail $trail) => $trail
+        ->parent('platform.note.list')
+        ->push('Создание заметки', route('platform.note.create')));
+
+Route::screen('notes/{note}/edit', NoteEditScreen::class)
+    ->name('platform.note.edit')
+    ->breadcrumbs(fn (Trail $trail) => $trail
+        ->parent('platform.note.list')
+        ->push('Редактирование заметки'));
+
+Route::screen('categories', CategoryListScreen::class)
+    ->name('platform.category.list')
+    ->breadcrumbs(fn (Trail $trail) => $trail
+        ->parent('platform.index')
+        ->push('Категории', route('platform.category.list')));
+
+Route::screen('categories/create', CategoryEditScreen::class)
+    ->name('platform.category.create')
+    ->breadcrumbs(fn (Trail $trail) => $trail
+        ->parent('platform.category.list')
+        ->push('Создание категории', route('platform.category.create')));
+
+Route::screen('categories/{category}/edit', CategoryEditScreen::class)
+    ->name('platform.category.edit')
+    ->breadcrumbs(fn (Trail $trail) => $trail
+        ->parent('platform.category.list')
+        ->push('Редактирование категории'));
 Route::screen('profile', UserProfileScreen::class)
     ->name('platform.profile')
     ->breadcrumbs(fn (Trail $trail) => $trail
@@ -83,22 +100,3 @@ Route::screen('roles', RoleListScreen::class)
     ->breadcrumbs(fn (Trail $trail) => $trail
         ->parent('platform.index')
         ->push(__('Roles'), route('platform.systems.roles')));
-
-// Example...
-Route::screen('example', ExampleScreen::class)
-    ->name('platform.example')
-    ->breadcrumbs(fn (Trail $trail) => $trail
-        ->parent('platform.index')
-        ->push('Example Screen'));
-
-Route::screen('/examples/form/fields', ExampleFieldsScreen::class)->name('platform.example.fields');
-Route::screen('/examples/form/advanced', ExampleFieldsAdvancedScreen::class)->name('platform.example.advanced');
-Route::screen('/examples/form/editors', ExampleTextEditorsScreen::class)->name('platform.example.editors');
-Route::screen('/examples/form/actions', ExampleActionsScreen::class)->name('platform.example.actions');
-
-Route::screen('/examples/layouts', ExampleLayoutsScreen::class)->name('platform.example.layouts');
-Route::screen('/examples/grid', ExampleGridScreen::class)->name('platform.example.grid');
-Route::screen('/examples/charts', ExampleChartsScreen::class)->name('platform.example.charts');
-Route::screen('/examples/cards', ExampleCardsScreen::class)->name('platform.example.cards');
-
-// Route::screen('idea', Idea::class, 'platform.screens.idea');
