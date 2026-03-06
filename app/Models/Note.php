@@ -46,6 +46,6 @@ class Note extends Model
 
     public function categories(): BelongsToMany
     {
-        return $this->belongsToMany(NoteCategory::class, 'category_note', 'note_id', 'category_id');
+        return $this->belongsToMany(NoteCategory::class, 'note_category', 'note_id', 'note_category_id');
     }
 }
