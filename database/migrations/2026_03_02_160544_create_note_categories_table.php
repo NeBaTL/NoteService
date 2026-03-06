@@ -11,7 +11,7 @@ return new class extends Migration
     {
         Schema::create('note_categories', function (Blueprint $table) {
             $table->id();
-            $table->name();
+            $table->string('name');
             $table->timestamps();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             
