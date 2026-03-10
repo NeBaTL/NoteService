@@ -15,7 +15,9 @@ class NoteListScreen extends Screen
         public function query(): array
     {
         return [
-            'notes' => Note::with('categories')->paginate(20),
+            'notes' => Note::with('categories')
+            ->where('user_id', auth()->id())  
+            ->paginate(20),
         ];
     }
 

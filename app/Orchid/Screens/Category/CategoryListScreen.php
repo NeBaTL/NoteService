@@ -14,8 +14,10 @@ class CategoryListScreen extends Screen
         public function query(): array
     {
         return [
-            'categories' => NoteCategory::withCount('notes')->paginate(20),
-        ];
+        'categories' => NoteCategory::withCount('notes')
+            ->where('user_id', auth()->id())  // Только категории текущего пользователя
+            ->paginate(20),
+    ];
     }
 
     public function name(): ?string
