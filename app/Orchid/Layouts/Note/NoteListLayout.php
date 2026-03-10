@@ -8,6 +8,7 @@ use App\Models\Note;
 use Orchid\Screen\Actions\Link;
 use Orchid\Screen\Layouts\Table;
 use Orchid\Screen\TD;
+use Illuminate\Support\Str;
 
 class NoteListLayout extends Table
 {
@@ -16,7 +17,7 @@ class NoteListLayout extends Table
      *
      * @var string
      */
-    protected $target = 'notes';
+    public $target = 'notes';
 
     /**
      * @return TD[]
@@ -26,12 +27,11 @@ class NoteListLayout extends Table
         return [
             TD::make('id', 'ID')
                 ->sort()
-                ->render(function (Note $note) {
-                    return $note->id;
-                }),
+                ->align(TD::ALIGN_CENTER),
 
             TD::make('title', 'Заголовок')
                 ->sort()
+                ->filter()
                 ->render(function (Note $note) {
                     return Link::make($note->title)
                         ->route('platform.note.edit', $note);
@@ -39,7 +39,20 @@ class NoteListLayout extends Table
 
             TD::make('content', 'Содержание')
                 ->render(function (Note $note) {
-                    return $note->content ? substr($note->content, 0, 50) . '...' : '';
+                    return Str::limit($note->content, 50);
+                }),
+
+            TD::make('categories', 'Категории')
+                ->render(function (Note $note) {
+                    if ($note->categories->isEmpty()) {
+                        return '—';
+                    }
+                    return $note->categories
+                        ->pluck('name')
+                        ->map(function ($name) {
+                            return "<span class='badge bg-secondary'>$name</span>";
+                        })
+                        ->implode(' ');
                 }),
 
             TD::make('created_at', 'Создано')
