@@ -18,27 +18,23 @@ class CategoryListLayout extends Table
         return [
             TD::make('id', 'ID')
                 ->sort()
-                ->render(function (NoteCategory $category) {
-                    return $category->id;
-                }),
+                ->render(fn (NoteCategory $category) => $category->id),
 
             TD::make('name', 'Название')
                 ->sort()
-                ->render(function (NoteCategory $category) {
-                    return Link::make($category->name)
-                        ->route('platform.category.edit', $category);
-                }),
+                ->render(fn (NoteCategory $category) => Link::make($category->name)
+                    ->route('platform.category.edit', $category)),
+
+            TD::make('user_id', 'Создатель')
+                ->render(fn (NoteCategory $category) => $category->user->name ?? 'Неизвестно'),
 
             TD::make('notes_count', 'Количество заметок')
-                ->render(function (NoteCategory $category) {
-                    return $category->notes_count ?? 0;
-                }),
+                ->sort()
+                ->render(fn (NoteCategory $category) => $category->notes_count),
 
             TD::make('created_at', 'Создано')
                 ->sort()
-                ->render(function (NoteCategory $category) {
-                    return $category->created_at->format('d.m.Y H:i');
-                }),
+                ->render(fn (NoteCategory $category) => $category->created_at->format('d.m.Y H:i')),
         ];
     }
 }
