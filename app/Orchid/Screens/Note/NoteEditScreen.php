@@ -21,9 +21,13 @@ class NoteEditScreen extends Screen
 
     public function query(Note $note): array
     {
-        return [
-            'note' => $note,
-        ];
+        if ($note->exists && $note->user_id !== auth()->id()) {
+        abort(403, 'У вас нет доступа к этой заметке');
+    }
+
+    return [
+        'note' => $note,
+    ];
     }
 
     public function name(): ?string

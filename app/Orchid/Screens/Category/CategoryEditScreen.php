@@ -18,9 +18,13 @@ class CategoryEditScreen extends Screen
 
     public function query(NoteCategory $category): array
     {
-        return [
-            'category' => $category,
-        ];
+        if ($category->exists && $category->user_id !== auth()->id()) {
+        abort(403, 'У вас нет доступа к этой категории');
+    }
+
+    return [
+        'category' => $category,
+    ];
     }
 
     public function name(): ?string
