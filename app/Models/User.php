@@ -74,13 +74,6 @@ class User extends Authenticatable
 
     public function noteCategories()
     {
-        return $this->hasManyThrough(
-            NoteCategory::class,
-            Note::class,
-            'user_id',
-            'id',
-            'id',
-            'category_id'
-        );
+        return $this->hasMany(NoteCategory::class);
     }
 }
