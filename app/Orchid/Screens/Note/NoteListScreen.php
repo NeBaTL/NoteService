@@ -12,15 +12,12 @@ use Orchid\Support\Facades\Layout;
 
 class NoteListScreen extends Screen
 {
-        public function query(): array
+    public function query(): array
     {
         return [
-            'notes' => Note::with('categories')
-            ->where('user_id', auth()->id())  
-            ->paginate(20),
+            'notes' => auth()->user()->notes()->paginate()
         ];
     }
-
     public function name(): ?string
     {
         return 'Управление заметками';
