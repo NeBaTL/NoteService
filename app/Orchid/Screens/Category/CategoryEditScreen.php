@@ -23,12 +23,9 @@ class CategoryEditScreen extends Screen
         abort(403, 'У вас нет доступа к этой категории');
     }
 
-    // Добавляем список категорий текущего пользователя
-    $categories = auth()->user()->noteCategories()->paginate();
 
     return [
         'category' => $category,
-        'categories' => $categories,  // Добавлено!
     ];
 }
 
