@@ -66,4 +66,14 @@ class User extends Authenticatable
         'updated_at',
         'created_at',
     ];
+
+    public function notes()
+    {
+        return $this->hasMany(Note::class);
+    }
+
+    public function noteCategories()
+    {
+        return $this->hasMany(NoteCategory::class);
+    }
 }
