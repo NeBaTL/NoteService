@@ -43,7 +43,18 @@ class PlatformProvider extends OrchidServiceProvider
             Menu::make('Категории')
                 ->icon('bs.tags')
                 ->route('platform.category.list'),
-        ];
+         Menu::make(__('Users'))
+                ->icon('bs.people')
+                ->route('platform.systems.users')
+                ->permission('platform.systems.users')
+                ->title(__('Access Controls')),
+
+            Menu::make(__('Roles'))
+                ->icon('bs.shield')
+                ->route('platform.systems.roles')
+                ->permission('platform.systems.roles')
+                ->divider(),
+                ];
     }
 
     /**
@@ -59,4 +70,5 @@ class PlatformProvider extends OrchidServiceProvider
                 ->addPermission('platform.systems.users', __('Users')),
         ];
     }
+
 }

@@ -12,7 +12,7 @@ class NoteCategory extends Model
 {
     use AsSource, Filterable;
 
-    protected $table = 'note_categories';
+    
     
     protected $fillable = ['user_id', 'name'];
 
@@ -44,7 +44,7 @@ class NoteCategory extends Model
     }
 
     public function notes(): BelongsToMany
-{
-    return $this->belongsToMany(Note::class, 'note_category', 'note_category_id', 'note_id');
-}
+    {
+        return $this->belongsToMany(Note::class, 'note_category', 'note_category_id', 'note_id');
+    }
 }

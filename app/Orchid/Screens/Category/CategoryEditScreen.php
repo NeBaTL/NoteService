@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 namespace App\Orchid\Screens\Category;
-
+use Orchid\Screen\Fields\Relation;
 use App\Models\NoteCategory;
 use Illuminate\Http\Request;
 use Orchid\Screen\Actions\Button;
@@ -23,12 +23,9 @@ class CategoryEditScreen extends Screen
         abort(403, 'У вас нет доступа к этой категории');
     }
 
-    // Добавляем список категорий текущего пользователя
-    $categories = auth()->user()->noteCategories()->paginate();
 
     return [
         'category' => $category,
-        'categories' => $categories,  // Добавлено!
     ];
 }
 
@@ -66,24 +63,27 @@ class CategoryEditScreen extends Screen
                     ->required(),
             ]),
         ];
+        
     }
 
     public function save(NoteCategory $category, Request $request)
-    {
-        $request->validate([
-            'category.name' => 'required|string|max:255',
-        ]);
+{
+    $request->validate([
+        'category.name' => 'required|string|max:255',
+    ]);
 
-        $categoryData = $request->get('category');
-        
-        $category->fill($categoryData);
-        $category->user_id = auth()->id();
-        $category->save();
+    $categoryData = $request->get('category');
+    
+    // Автоматически добавляем ID текущего пользователя
+    $category->fill($categoryData);
+    $category->user_id = auth()->id(); // Вот эта строка добавляет пользователя
+    
+    $category->save();
 
-        Toast::info('Категория успешно сохранена');
+    Toast::info('Категория успешно сохранена');
 
-        return redirect()->route('platform.category.list');
-    }
+    return redirect()->route('platform.category.list');
+}
 
     public function remove(NoteCategory $category)
     {
