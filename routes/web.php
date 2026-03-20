@@ -1,12 +1,16 @@
 <?php
+
 use App\Http\Controllers\NoteController;
 use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\Auth;
 
+// Публичные маршруты
 Route::get('/notes', [NoteController::class, 'index'])->name('notes.index');
 Route::get('/notes/{note}', [NoteController::class, 'show'])->name('notes.show');
 
-Route::get('/tokens/create', function (){
-    $token = Auth::user()->createToken('name');
-    return ['token' => $token->plainTextToken];
+// Маршрут для создания токена (только для авторизованных)
+Route::middleware('auth')->group(function () {
+    Route::get('/tokens/create', function () {
+        $token = auth()->user()->createToken('api-token');
+        return ['token' => $token->plainTextToken];
+    });
 });
