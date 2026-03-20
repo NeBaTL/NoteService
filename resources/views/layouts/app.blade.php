@@ -21,12 +21,24 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('notes.index') }}">Заметки</a>
-                    </li>
                     @auth
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('dashboard') }}">Админка</a>
+                            <a class="nav-link" href="{{ route('notes.index') }}">Мои заметки</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/admin">Админ-панель</a>
+                        </li>
+                        <li class="nav-item">
+                            <form method="POST" action="{{ route('logout') }}" class="d-inline">
+                                @csrf
+                                <button type="submit" class="btn nav-link" style="background: none; border: none; color: rgba(255,255,255,0.55); cursor: pointer;">
+                                    Выйти
+                                </button>
+                            </form>
+                        </li>
+                    @else
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('login') }}">Войти</a>
                         </li>
                     @endauth
                 </ul>
