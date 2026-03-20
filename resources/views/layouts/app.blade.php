@@ -30,7 +30,7 @@
                             <a class="nav-link" href="{{ route('platform.index') }}">Админка</a>
                         </li>
                         <li class="nav-item">
-                            <form method="POST" action="{{ route('platform.logout') }}" class="d-inline">
+                            <form method="POST" action="{{ route('logout') }}" class="d-inline">
                                 @csrf
                                 <button type="submit" class="btn btn-link nav-link" style="display: inline; cursor: pointer;">
                                     Выйти
@@ -39,7 +39,7 @@
                         </li>
                     @else
                         <li class="nav-item">
-                            <a class="nav-link btn btn-outline-light" href="{{ route('platform.login') }}" style="margin-left: 10px;">
+                            <a class="nav-link btn btn-outline-light" href="{{ route('login') }}" style="margin-left: 10px;">
                                 Войти
                             </a>
                         </li>
