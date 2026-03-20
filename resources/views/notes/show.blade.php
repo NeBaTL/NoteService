@@ -3,42 +3,50 @@
 @section('title', $note->title)
 
 @section('content')
-<div class="container">
-    <nav aria-label="breadcrumb" class="mb-4">
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="{{ route('notes.index') }}">Заметки</a></li>
-            <li class="breadcrumb-item active">{{ $note->title }}</li>
-        </ol>
-    </nav>
-
+<div class="container py-4">
     <div class="card">
-        <div class="card-header">
-            <h1>{{ $note->title }}</h1>
+        <div class="card-header d-flex justify-content-between align-items-center">
+            <h1 class="h3 mb-0">{{ $note->title }}</h1>
+            <small class="text-muted">
+                Создано: {{ $note->created_at->format('d.m.Y H:i') }}
+            </small>
         </div>
+        
         <div class="card-body">
-            {{-- Категории --}}
-            <div class="mb-3">
-                <strong>Категории:</strong><br>
-                @forelse($note->categories as $category)
-                    <span class="badge me-1 mt-1" style="background-color: #6f42c1;">
-                        {{ $category->name }}
-                    </span>
-                @empty
-                    <span class="badge bg-secondary">Без категории</span>
-                @endforelse
-            </div>
-            
-            {{-- Контент --}}
-            <div class="note-content mt-4">
+            <div class="note-content">
                 {!! nl2br(e($note->content)) !!}
             </div>
         </div>
+        
         <div class="card-footer">
-            <a href="{{ route('notes.index') }}" class="btn btn-secondary">Назад к списку</a>
-            <small class="text-muted float-end">
-                Создано: {{ $note->created_at->format('d.m.Y H:i') }}
-            </small>
+            <div class="d-flex justify-content-between">
+                <a href="{{ route('notes.index') }}" class="btn btn-secondary">
+                    ← Назад к списку
+                </a>
+                <div>
+                    <a href="{{ route('notes.edit', $note) }}" class="btn btn-primary">
+                        Редактировать
+                    </a>
+                    <form action="{{ route('notes.destroy', $note) }}" method="POST" class="d-inline">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="btn btn-danger" onclick="return confirm('Удалить заметку?')">
+                            Удалить
+                        </button>
+                    </form>
+                </div>
+            </div>
         </div>
     </div>
 </div>
 @endsection
+
+@push('styles')
+<style>
+    .note-content {
+        font-size: 1.1rem;
+        line-height: 1.6;
+        white-space: pre-wrap;
+    }
+</style>
+@endpush
